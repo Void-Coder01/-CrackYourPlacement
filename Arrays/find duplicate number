@@ -1,1 +1,53 @@
+//Tortoise & hare algorithm     Time Complexity - O(n) Space complexity - O(1)
 
+public int findDuplicaate(int[] nums){
+    int slow = nums[0];
+    int fast = nums[0];
+
+    //incremnet slow by 1 and fast by 2
+    slow = nums[slow];
+    fast = nums[nums[fast]];
+
+    //itr till slow meets fasts
+    while(slow != fast){
+      slow = nums[slow];
+      fast = nums[nums[fast]];
+    }
+
+    //now to detect the point where cycle had begun we will restart slow from start and inc fast by 1 step
+    slow = nums[0];
+
+    while(slow != fast){
+      slow = nums[slow];
+      fast = nums[fast];
+    }
+
+    //return the point wherer this cycle (means repeated number) has started
+    return slow;
+}
+
+
+
+//Binary Search Approach   Time Complexity - O(nlogn) Space complexity - O(1)
+
+public int findDuplicate(int[] nums) {
+        int l= 1, h = nums.length;
+
+        while(l<h){
+            int mid = l + (h - l)/2;
+
+            int count = 0;
+            for(int num: nums){
+                if(num<=mid){
+                    count++;
+                }
+            }
+
+            if(count>mid){
+                h = mid;
+            }else{
+                l = mid+1;
+            }
+        }
+        return l;
+    }
