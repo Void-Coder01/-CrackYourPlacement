@@ -1,1 +1,27 @@
+//using 2 pointer technieque (read and write)
 
+public int removeDuplicates(int[] nums) {
+
+  //if length is zero return 0
+        if(nums.length == 0){
+            return 0;
+        }
+
+//j pointer will always point to unique elements in array
+
+       int j=1;//as 0th element will always be unique so intialise with 1 
+
+       
+       for(int i=1;i<nums.length;i++){
+          //check if current ith element is unique
+        if(nums[i] != nums[i-1]){
+
+            //if unique then rewrite on jth position and inc j
+            nums[j] = nums[i];
+
+            j++;
+        }
+       }
+      //as j is pointing to unique elements in arr we return it
+       return j;
+    }
