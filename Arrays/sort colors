@@ -1,1 +1,57 @@
+//using DNF Algorithm(Dutch-National-flag)
+ public void sortColors(int[] nums) {  TC - O(n)
+        int low = 0;
+        int mid = 0;
+        int high = nums.length-1;
 
+        while(mid <= high){
+            //if arr[mid] == 0
+            if(nums[mid] == 0){
+                int temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] = temp;
+                low ++;
+                mid ++;
+            }//if arr[mid] == 1
+            else if(nums[mid] == 1){
+                mid++;
+            }//else
+            else{
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                high --;
+            }
+        }
+  }
+
+//counting frequency and overwriting on array sequence wise
+public void sortColors(int[] nums) { TC - O(n)
+        int count0 = 0, count1 = 0, count2 = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] == 0){
+                count0++;
+            }else if(nums[i] == 1){
+                count1++;
+            }else{
+                count2++;
+            }
+        }
+
+        int i=0;
+        while(count0 > 0){
+            nums[i++] = 0;
+            count0--;
+        }
+
+        while(count1 > 0){
+            nums[i++] = 1;
+            count1--;
+        }
+
+        while(count2 > 0){
+            nums[i++] = 2;
+            count2--;
+        }
+        
+    }
