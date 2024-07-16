@@ -1,1 +1,18 @@
+public int maxProfit(int[] prices) {
+        int currDay = prices[0];
+        int profit = 0;
+        int n = prices.length;
 
+        for(int i=1;i<n;i++){
+            //if curr price of stock is less than previous days so instead of selling we buy it
+            //on low cost
+            if(prices[i]<currDay){
+                currDay = prices[i];
+            }else{
+                //extract the profit
+                int currProfit = prices[i] - currDay;
+                profit = Math.max(profit,currProfit);
+            }
+        }
+        return profit;
+    }
