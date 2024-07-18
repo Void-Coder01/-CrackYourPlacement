@@ -1,1 +1,25 @@
+//using 2 pointer technique 
+//if we observed the height of area will always depend on the minimest out of 2 pillars
+//width can be derived from (j-i) then we just multiply height*width to get current area
+//so we put one pointer on 0th idx and another at arr.length and itr over arr by calculating area of each pillars 
 
+public int maxArea(int[] height) {
+        int maxArea = 0;
+        int i=0, j = height.length-1;
+
+        while(i<j){
+            int currArea = Math.min(height[i],height[j]);
+
+            //compare local area with global area 
+            maxArea = Math.max(maxArea,(currArea*((j-i))));
+
+            //increment which have less height
+            if(height[i] < height[j]){
+                i++;
+            }else{
+                j--;
+            }
+        }
+
+        return maxArea;
+    }
