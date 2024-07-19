@@ -56,7 +56,7 @@ public List<List<Integer>> threeSum(int[] nums) {
                     ans.add(a);
                     //as we have add current triplet we move our pointers
                     j++;
-                    k--;
+                 
 
                     //but inorder to get unique triplets only we inc j and dec k till they are 
                     //different from their previous ele i.e unique
