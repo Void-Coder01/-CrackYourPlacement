@@ -1,1 +1,75 @@
+//Basic brute force would be iterate over array with 3 loops and for each iteration add curr idx of 3 loops if it = 0 it our one of triplet but it will give TLE
 
+//Another apporoach to use basic maths as we want x+y+z = 0 , so x+y = -z we can use this to store element hashmap and for duplicacy we store it in hashset'
+public List<List<Integer>> threeSum(int[] nums) {
+        HashSet<List<Integer>> s = new HashSet<>();
+
+        for(int i=0;i<nums.length;i++){
+            HashMap<Integer,Integer> hm = new HashMap<>();
+            for(int j=i+1;j<nums.length;j++){
+                int third = -(nums[i]+nums[j]);
+                if(hm.containsKey(third)){
+                    List<Integer> a = new ArrayList<>(Arrays.asList(nums[i],nums[j],third));
+                    Collections.sort(a);
+                    s.add(a);
+                }
+                hm.put(nums[j],j);
+            }
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        for(List<Integer> l : s){
+            ans.add(l);
+        }
+        return ans;
+    }
+
+//The optimal one is to use 2 pointer technique : First sort the array so we can apply our 2 pointer technique if sum of triplets is less than 0 inc start pointer
+//else dec pointer at the end
+public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for(int i=0;i<nums.length;i++){
+            if(i>0 && nums[i] == nums[i-1]){
+                continue;
+            //inc cuz we dont want same ele to repeat because we have to return unique triplets
+            }
+
+            //using 2-pointer technique 
+            int j=i+1;
+            int k = nums.length-1;
+
+            while(j<k){
+                int sum = nums[i] + nums[j] + nums[k];
+                //there will be 3 cases 
+
+                //case 1 - sum > 0 then we dec k as we need smaller no
+                if(sum > 0){
+                    k--;
+                }else if(sum < 0){
+                //we need larger no.
+                    j++;
+                }else{
+                    //means our sum = 0 so add it ans 
+                    List<Integer> a = new ArrayList<>(Arrays.asList(nums[i],nums[j],nums[k]));
+                    ans.add(a);
+                    //as we have add current triplet we move our pointers
+                    j++;
+                    k--;
+
+                    //but inorder to get unique triplets only we inc j and dec k till they are 
+                    //different from their previous ele i.e unique
+                    while(j<k && nums[j] == nums[j-1]){
+                        j++;
+                    }
+
+                    while(j<k && nums[k] == nums[k-1]){
+                        k--;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
