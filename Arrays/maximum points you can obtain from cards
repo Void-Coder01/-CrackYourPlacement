@@ -1,0 +1,25 @@
+//using 2 pointer and sliding window technique 
+public int maxScore(int[] cardPoints, int k) {
+        int lsum = 0;
+
+//first store 0 to k-1 sum 
+        for(int i=0;i<k;i++){
+            lsum += cardPoints[i];
+        }
+        //intialise global ans var with lsum
+        int totalsum = lsum;
+        //temp var 
+        int sum = lsum;
+        //right pointer
+        int rpointer = cardPoints.length - 1;
+
+        //now remove 1 element from temp var and add 1 ele from right & compare it with global var
+        for(int i=k-1;i>=0;i--){
+             sum -= cardPoints[i];
+             sum += cardPoints[rpointer];
+             rpointer--;
+
+             totalsum = Math.max(totalsum, sum);
+        }
+        return totalsum;
+    }
