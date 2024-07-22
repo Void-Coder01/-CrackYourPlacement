@@ -1,0 +1,33 @@
+//using iterative method 
+public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if ( root == null){return ans;}
+
+        Stack<TreeNode> stack = new Stack<>();
+
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.add(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            ans.add(root.val);
+            root = root.right;
+        }
+        return ans;
+    }
+
+//using recursion method
+public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        helper(root, res);
+        return res;
+    }
+
+    public void helper(TreeNode root, List<Integer> res) {
+        if (root != null) {
+            helper(root.left, res);
+            res.add(root.val);
+            helper(root.right, res);
+        }
+    }
