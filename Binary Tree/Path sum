@@ -1,0 +1,22 @@
+//using recursion 
+private int sum = 0;
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null){
+            return false;
+        }
+        sum += root.val;
+    //if we found target with leaf node return true as we found what we wanted
+        if(sum == targetSum && (root.left == null && root.right == null)){
+            return true;
+        }
+
+        boolean left = hasPathSum(root.left,targetSum);
+        boolean right = hasPathSum(root.right , targetSum);
+//if we receive false from both side means our current root val doesn't contribute to find pathsum hence minus it from sum & return false
+        if(left == false && right == false){
+            sum -= root.val;
+            return false;
+        }
+//if we receive true evem from one side return true;
+        return true;
+    }
