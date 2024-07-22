@@ -1,1 +1,34 @@
+//if we observe carefully that if the arr doesn't consist of 0 or negative no. in this case we will sure reach at the end
+//so we will keep a maxidx which will tells us curr maxidx of ith idx if i<=maxidx then we update maxidx = i+nums[i] if not then return false;
 
+public boolean canJump(int[] nums) {
+        int maxIdx = nums[0];
+
+        for(int i=1;i<nums.length;i++){
+            if(maxIdx < i){
+                return false;
+            }
+            maxIdx = Math.max(maxIdx,i+nums[i]);
+            if(maxIdx >= nums.length){
+                return true;
+            }
+        }
+        return true;
+    }
+
+
+//Another apporoach is that we can move our goal towards 0th idx by locally calculating if ith idx can reach goal or not if it can reach that means any idx 
+//that can reach ith idx can also reach goal hence goal will be shifted to ith idx in this way if we reach 0th idx means 0th idx can reach last idx hence return 
+//true;
+
+public boolean canJump(int[] nums) {
+        int goal = nums.length-1;
+
+        for(int i=nums.length-2 ;i >= 0 ; i--){
+            if(i+nums[i] >= goal){
+                goal = i;
+            }
+        //don't return false right away if conditions not statify there are changes that idx before ith idx can reach curr goal hence don't change goal 
+        }
+        return goal == 0;
+    }
