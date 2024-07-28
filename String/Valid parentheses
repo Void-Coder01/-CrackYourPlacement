@@ -1,0 +1,58 @@
+//using stack 
+Stack<Character> S = new Stack<>();
+
+        if(s.charAt(0) == ')' || s.charAt(0) == '}' || s.charAt(0) == ']'){
+            return false;
+        }
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
+                S.add(s.charAt(i));
+            }else{
+                if(S.isEmpty()){
+                    return false;
+                }
+                if(S.peek() == '{' && ch == '}'
+              || S.peek() == '[' && ch == ']'
+              ||S.peek() == '(' && ch == ')'){
+                S.pop();
+              }else {
+                //kuch alg char aya toh false 
+                return false;
+              }
+            }
+        }
+
+        return S.isEmpty();
+    }
+
+//using stringBuilder
+public boolean isValid(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '[' || ch == '{') {
+                sb.append(ch);
+                continue;
+            }
+            if (sb.length() == 0) {
+                return false;
+            }
+            char lastChar = sb.charAt(sb.length() - 1);
+            if (ch == ')') {
+                if (lastChar != '(') {
+                    return false;
+                }
+            } else if (ch == ']') {
+                if (lastChar != '[') {
+                    return false;
+                }
+            } else {
+                if (lastChar != '{') {
+                    return false;
+                }
+            }
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.length() == 0;
+    }
