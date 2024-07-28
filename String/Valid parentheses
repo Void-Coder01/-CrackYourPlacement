@@ -56,3 +56,43 @@ public boolean isValid(String s) {
         }
         return sb.length() == 0;
     }
+
+//mimicing stack using an char Array - most optimal
+public boolean isValid(String s) {
+    // Convert the input string into a character array
+    char[] ch = s.toCharArray();
+    
+    // Initialize an index to keep track of the top of the stack
+    int index = -1;
+    
+    // Create an array to use as the stack, with a size equal to the input string's length
+    char[] para = new char[s.length()];
+    
+    // Iterate over each character in the input string
+    for (int i = 0; i < ch.length; i++) {
+        // If the character is an opening bracket, push it onto the stack
+        if (ch[i] == '(' || ch[i] == '{' || ch[i] == '[') {
+            para[++index] = ch[i];
+        } 
+        // If the character is a closing bracket
+        else if (index >= 0) {
+            // Check if it matches the corresponding opening bracket at the top of the stack
+            if (ch[i] == ')' && para[index] == '(') {
+                index--;
+            } else if (ch[i] == '}' && para[index] == '{') {
+                index--;
+            } else if (ch[i] == ']' && para[index] == '[') {
+                index--;
+            } else {
+                // If it does not match, the string is not valid
+                return false;
+            }
+        } else {
+            // If there is no corresponding opening bracket, the string is not valid
+            return false;
+        }
+    }
+    
+    // After processing all characters, the stack should be empty for the string to be valid
+    return index == -1;
+}
