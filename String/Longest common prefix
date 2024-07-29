@@ -1,0 +1,33 @@
+//vertical scanning - In this we are adding character one by one if it matches with our current char if not then directly return substring(0,till current idx)
+public String longestCommonPrefix(String[] strs) {
+       if(strs == null || strs.length == 0){
+        return "";
+       }
+
+       for(int i=0;i<strs[0].length();i++){
+        char c = strs[0].charAt(i);
+
+        for(int j=1;j<strs.length;j++){
+            if(i == strs[j].length() || strs[j].charAt(i) !=c ){
+                return strs[0].substring(0,i);
+            }
+        }
+       }
+  //if we itr all the character of first ele than first ele itself is the prefix so return 1st element
+       return strs[0];
+  }
+
+//horizontal scanning - In this we are removing character from backwards one by one if it doesn't match with our current string 
+public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) return "";
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) while (
+            strs[i].indexOf(prefix) != 0
+        ) {
+            prefix = prefix.substring(0, prefix.length() - 1);
+            if (prefix.isEmpty()) return "";
+        }
+        return prefix;
+    }
+
+
