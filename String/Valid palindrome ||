@@ -7,6 +7,8 @@
 
         while(i<j){
             if(s.charAt(i) != s.charAt(j)){
+//now the char are not same so we skip 1 char from both side alternatively and check whether string with skipped character forms a palindrome or not and return
+//accordingly 
                 return (helper(s,i+1,j) || helper(s,i,j-1));
             }else{
                 i++;
