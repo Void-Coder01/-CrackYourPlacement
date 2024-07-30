@@ -1,0 +1,30 @@
+public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+
+        if(helper(root) != -1){
+            return true;
+        }
+        return false;
+    }
+
+    public int helper(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+        int left = helper(root.left);
+        int right = helper(root.right);
+
+    //child k liye dek rha hu valid childs h ya nai
+        if(left == -1 || right == -1){
+            return -1;
+        }
+    //idr kud k liye dek rha hu kud valid hu ya nhi
+        if(Math.abs(left - right) > 1){
+            return -1;
+        }
+    //if valid 
+        return Math.max(left,right)+1;
+    }
